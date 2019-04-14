@@ -1,0 +1,16 @@
+class Solution:
+    def combinationSum3(self, k: int, n: int) -> List[List[int]]:
+        candidates= [1,2,3,4,5,6,7,8,9]
+        ans = []
+
+        def dfs(candidates,target,s,k,curr):
+            if target == 0 and len(curr) == k:
+                ans.append(curr[:])
+            for i in range(s,len(candidates)):
+                if candidates[i]>target:continue
+                elif len(curr)> k:return
+                curr.append(candidates[i])
+                dfs(candidates,target - candidates[i],i+1,k,curr)
+                curr.pop()
+        dfs(candidates,n,0,k,[])
+        return ans
