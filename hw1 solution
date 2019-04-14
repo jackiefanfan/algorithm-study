@@ -1,0 +1,21 @@
+class Solution:
+    def subsetHelper(self, arr, result, listA, start):
+        hardListA = copy.copy(listA)       
+        if (hardListA not in result):
+            result.append(hardListA)
+        for i in range(start,len(arr)):
+            listA.append(arr[i])
+            self.subsetHelper(arr,result,listA,i+1)
+            listA.pop()
+        return result
+    def subsetsWithDup(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        if (len(nums) == 0):
+            return []
+        nums = sorted(nums)
+        result = []
+        return self.subsetHelper(nums, result,[],0)
+        
