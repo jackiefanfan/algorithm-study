@@ -1,0 +1,16 @@
+class Solution:
+    def beautifulArray(self, N: int) -> List[int]:
+        cache = {}
+        def solve(N):
+            if N == 1: return [1]
+            if N in cache: return cache[N]
+            
+            even_index = N // 2
+            odd_index = N - even_index
+            even = solve(even_index)
+            odd = solve(odd_index)
+            even = [2*val for val in even]
+            odd = [2*val-1 for val in odd]
+            cache[N] = even + odd
+            return cache[N]
+        return solve(N)
