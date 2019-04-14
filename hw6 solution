@@ -1,0 +1,24 @@
+class Solution:
+    def partition(self, s: str) -> List[List[str]]:
+        def pal(i, j):
+            if i == j:
+                return True
+            while i < j:
+                if s[i] != s[j]:
+                    return False
+                i += 1
+                j -= 1
+            return True
+        
+        
+        def helper(idx, buff):
+            if idx == len(s):
+                result.append(buff)
+            else:
+                for i in range(idx, len(s)):
+                    if pal(idx, i):
+                        helper(i + 1, buff + [s[idx: i + 1]])
+        
+        result = []
+        helper(0, [])
+        return result
