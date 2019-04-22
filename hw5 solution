@@ -1,0 +1,18 @@
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        if len(nums) == 0: return 0
+        if len(nums) < 4: return max(nums)
+        
+        opts1 = [0]*len(nums)
+        opts2 = [0]*len(nums)
+        
+        not_first_robbed = nums[1:]
+        not_last_robbed = nums[:-1]
+        
+        opts1[1] = not_first_robbed[0]
+        opts2[1] = not_last_robbed[0]
+        
+        for i in range(2, len(nums)):
+            opts1[i] = max(opts1[i-1], opts1[i-2] + not_first_robbed[i-1])
+            opts2[i] = max(opts2[i-1], opts2[i-2] + not_last_robbed[i-1])
+        return max(opts1[-1], opts2[-1])
