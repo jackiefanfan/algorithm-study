@@ -1,0 +1,15 @@
+class Solution:
+    def eventualSafeNodes(self, graph: List[List[int]]) -> List[int]:
+        transforming = True
+        result = []
+        while transforming:
+            transforming = False
+            for element in graph:
+                for i, pointer in enumerate(element):
+                    if graph[pointer] == []:
+                        element.pop(i)
+                        transforming = True
+        for i, element in enumerate(graph):
+            if element == []:
+                result += [i]
+        return result
